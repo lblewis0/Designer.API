@@ -54,5 +54,30 @@ namespace Designer.DAL.Repositories
 
         }
 
+        public IEnumerable<Project> GetAllProjectsByUserId(int id)
+        {
+            Console.WriteLine("ProjectRepository.GetAllProjectsByUserId(int id).start");
+
+            List<Project> projects = new List<Project>();
+            using (SqlCommand cmd = _connection.CreateCommand())
+            {
+                string sql = "SELECT * FROM Projects where UserId = @id";
+                cmd.CommandText = sql;
+                cmd.Parameters.AddWithValue("id", id);
+
+                _connection.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        projects.Add(Mapper(reader));
+                    }
+                }
+                _connection.Close();
+            }
+            Console.WriteLine("ProjectRepository.GetAllProjectsByUserId(int id).end");
+            return projects;
+        }
+
     }
 }

@@ -15,6 +15,6 @@ namespace Designer.DAL.Interfaces
 
         //Project GetById(int id);
 
-        //IEnumerable<Project> GetProjects();
+        IEnumerable<Project> GetAllProjectsByUserId(int id);
     }
 }

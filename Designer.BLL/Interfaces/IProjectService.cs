@@ -10,5 +10,7 @@ namespace Designer.BLL.Interfaces
     public interface IProjectService
     {
         void CreateProject(ProjectDTO dto);
+
+        List<ProjectDTO> GetAllProjectsByUserId(int id);
     }
 }

@@ -44,6 +44,24 @@ namespace Designer.BLL.Services
 
         }
 
+        public List<ProjectDTO> GetAllProjectsByUserId(int id) 
+        {
+            Console.WriteLine("ProjectService.GetAllProjectsByUserId(int).start");
+
+            IEnumerable<Project> projectsDB = _projectRepository.GetAllProjectsByUserId(id);
+            List<ProjectDTO> projectsDTO = new List<ProjectDTO>();
+
+            foreach(var project in projectsDB)
+            {
+                ProjectDTO parsedProject = new ProjectDTO(project);
+                projectsDTO.Add(parsedProject);
+            }
+
+            Console.WriteLine("ProjectService.GetAllProjectsByUserId(int).end");
+            return projectsDTO;
+
+        }
+
         public DateTime ParseDate(string date)
         {
             string format = "yyyy-MM-dd'T'HH:mm:ss.fff'Z'";

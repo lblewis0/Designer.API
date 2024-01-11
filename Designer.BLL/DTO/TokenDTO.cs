@@ -20,6 +20,10 @@ namespace Designer.BLL.DTO
             Token = token;
         }
 
+        public TokenDTO()
+        {
+        }
+
         public override string ToString()
         {
             return $"TokenDTO:\n" +

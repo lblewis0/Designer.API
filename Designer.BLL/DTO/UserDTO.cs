@@ -30,5 +30,10 @@ namespace Designer.BLL.DTO
             Username = user.Username;
             Role = user.Role;
         }
+
+        public UserDTO()
+        {
+
+        }
     }
 }

@@ -32,7 +32,7 @@ namespace Designer.API.Controllers
                 _projectService.CreateProject(dto);
 
                 Console.WriteLine("");
-                Console.WriteLine("AuthentificationController.Login(LoginDTO).end".Pastel(Color.Yellow));
+                Console.WriteLine("ProjectController.CreateProject(ProjectDTO).end".Pastel(Color.Yellow));
                 Console.WriteLine("HttpPost response: Ok()");
 
                 return Ok();
@@ -42,6 +42,36 @@ namespace Designer.API.Controllers
                 throw;
             }
         }
+
+        [HttpPost("getProjects")]
+        public IActionResult GetProjects([FromBody] TokenDTO token)
+        {
+            try
+            {
+                Console.WriteLine("");
+                Console.WriteLine("HttpPost request:");
+                Console.WriteLine("ProjectController.GetProjects(TokenDTO).start".Pastel(Color.Yellow));
+                Console.WriteLine("");
+
+                List<ProjectDTO> list = _projectService.GetAllProjectsByUserId(token.UserDTO.Id);
+
+                Console.WriteLine("");
+                Console.WriteLine("ProjectController.GetProjects(TokenDTO).end".Pastel(Color.Yellow));
+                Console.WriteLine("HttpPost response: List<Projects>");
+                foreach(ProjectDTO dto in list)
+                {
+                    Console.WriteLine(dto);
+                }
+
+                return Ok(list);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
 
     }
 
