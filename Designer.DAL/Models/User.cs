@@ -20,6 +20,8 @@ namespace Designer.DAL.Models
 
         public string Password { get; set; }
 
-        public string Role { get; set; }
+        public string UserRole { get; set; }
+
+        public int ActiveProjectId { get; set; }
     }
 }

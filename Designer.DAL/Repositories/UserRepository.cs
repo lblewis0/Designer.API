@@ -28,7 +28,8 @@ namespace Designer.DAL.Repositories
                 Email = (string)reader["Email"],
                 Username = (string)reader["Username"],
                 Password = (string)reader["Password"],
-                Role = (string)reader["UserRole"]
+                UserRole = (string)reader["UserRole"],
+                ActiveProjectId = (int)reader["ActiveProjectId"]
             };
         }
 
@@ -36,8 +37,8 @@ namespace Designer.DAL.Repositories
         {
             using (SqlCommand cmd = _connection.CreateCommand())
             {
-                string sql = "INSERT INTO Users (Firstname, Lastname, Email, Username, Password)" +
-                    "VALUES (@firstname, @lastname, @email, @username, @password)";
+                string sql = "INSERT INTO Users (Firstname, Lastname, Email, Username, Password, UserRole, ActiveProjectId)" +
+                    "VALUES (@firstname, @lastname, @email, @username, @password, @userRole, @activeProjectId)";
 
                 cmd.CommandText = sql;
                 cmd.Parameters.AddWithValue("firstname", user.Firstname);
@@ -45,6 +46,8 @@ namespace Designer.DAL.Repositories
                 cmd.Parameters.AddWithValue("email", user.Email);
                 cmd.Parameters.AddWithValue("username", user.Username);
                 cmd.Parameters.AddWithValue("password", user.Password);
+                cmd.Parameters.AddWithValue("userRole", user.UserRole);
+                cmd.Parameters.AddWithValue("activeProjectId", user.ActiveProjectId);
 
                 _connection.Open();
                 cmd.ExecuteNonQuery();
@@ -129,6 +132,26 @@ namespace Designer.DAL.Repositories
                 _connection.Close();
             }
             return users;
+        }
+
+        public void UpdateActiveProject(User user)
+        {
+            Console.WriteLine("UserRepository.UpdateActiveProject(int userId, int activeId).start");
+
+            using (SqlCommand cmd = _connection.CreateCommand())
+            {
+                string sql = "UPDATE Users SET ActiveProjectId=@newid WHERE Id=@userid";
+                cmd.CommandText = sql;
+
+                cmd.Parameters.AddWithValue("newid", user.ActiveProjectId);
+                cmd.Parameters.AddWithValue("userid", user.Id);
+
+                _connection.Open();
+                cmd.ExecuteNonQuery();
+                _connection.Close();
+            }
+
+            Console.WriteLine("UserRepository.UpdateActiveProject(int userId, int activeId).end");
         }
     }
 }

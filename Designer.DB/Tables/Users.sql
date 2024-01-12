@@ -7,5 +7,6 @@
 	[Username] NVARCHAR(150) NOT NULL,
 	[Password] NVARCHAR(150) NOT NULL,
 	[UserRole] NVARCHAR(150) NOT NULL,
+	[ActiveProjectId] INT NOT NULL,
 	CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED ([Id]),
 )

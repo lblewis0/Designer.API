@@ -36,7 +36,7 @@ namespace Designer.API.Controllers
 
                 UserDTO connectedUser = _authentificationService.Login(dto);
 
-                string token = _jwtService.CreateToken(connectedUser.Id, connectedUser.Email, connectedUser.Role);
+                string token = _jwtService.CreateToken(connectedUser.Id, connectedUser.Email, connectedUser.UserRole);
 
                 TokenDTO tokenDTO = new(connectedUser, token);
 

@@ -32,7 +32,8 @@ namespace Designer.BLL.DTO
                    $"   Lastname: {UserDTO.Lastname.Pastel(Color.Green)}\n" +
                    $"   Email: {UserDTO.Email.Pastel(Color.Green)}\n" +
                    $"   Username: {UserDTO.Username.Pastel(Color.Green)}\n" +
-                   $"   Role: {UserDTO.Role.Pastel(Color.Green)}\n" +
+                   $"   Role: {UserDTO.UserRole.Pastel(Color.Green)}\n" +
+                   $"   ActiveProjectId: {UserDTO.ActiveProjectId.ToString().Pastel(Color.Green)}\n" +
                    $"   Token: {Token.Pastel(Color.Orange)}";
         }
     }

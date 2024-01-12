@@ -17,6 +17,8 @@ namespace Designer.DAL.Interfaces
 
         User GetByUsername(string username);
 
+        void UpdateActiveProject(User user);
+
         IEnumerable<User> GetUsers();
     }
 }

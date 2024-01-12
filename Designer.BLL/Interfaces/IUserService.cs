@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace Designer.BLL.Interfaces
 {
-    public interface IProjectService
+    public interface IUserService
     {
-        void CreateProject(ProjectDTO dto);
-
-        List<ProjectDTO> GetAllProjectsByUserId(int id);
-
+        void UpdateUserActiveProject(UserDTO user);
     }
 }

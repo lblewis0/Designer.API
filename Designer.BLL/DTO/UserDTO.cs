@@ -19,7 +19,9 @@ namespace Designer.BLL.DTO
 
         public string Username { get; set; }
 
-        public string Role { get; set; }
+        public string UserRole { get; set; }
+
+        public int ActiveProjectId { get; set; }
 
         public UserDTO(User user)
         {
@@ -28,7 +30,8 @@ namespace Designer.BLL.DTO
             Lastname = user.Lastname;
             Email = user.Email;
             Username = user.Username;
-            Role = user.Role;
+            UserRole = user.UserRole;
+            ActiveProjectId = user.ActiveProjectId;
         }
 
         public UserDTO()

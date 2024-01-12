@@ -10,6 +10,6 @@ Post-Deployment Script Template
 --------------------------------------------------------------------------------------
 */
 
-INSERT INTO [dbo].[Users] ([Firstname], [Lastname], [Email], [Username], [Password], [UserRole])
-VALUES ('Louis', 'Boeckmans', 'louis.boeckmans@outlook.com', 'LouisB', 'designer', 'Admin');
+INSERT INTO [dbo].[Users] ([Firstname], [Lastname], [Email], [Username], [Password], [UserRole], [ActiveProjectId])
+VALUES ('Louis', 'Boeckmans', 'louis.boeckmans@outlook.com', 'LouisB', 'designer', 'Admin', 0);
 

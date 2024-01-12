@@ -71,8 +71,6 @@ namespace Designer.API.Controllers
             }
         }
 
-
-
     }
 
 }
