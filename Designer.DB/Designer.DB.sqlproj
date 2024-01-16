@@ -62,6 +62,7 @@
   <ItemGroup>
     <Build Include="Tables\Users.sql" />
     <Build Include="Tables\Projects.sql" />
+    <Build Include="Tables\Folders.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment_Users.sql" />
