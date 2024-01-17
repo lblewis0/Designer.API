@@ -80,7 +80,7 @@ namespace Designer.API.Controllers
                 Console.WriteLine("");
                 Console.WriteLine("ProjectController.GetProjects(TokenDTO).end".Pastel(Color.Yellow));
                 Console.WriteLine("HttpPost response: List<Projects>");
-                foreach(ProjectDTO dto in list)
+                foreach (ProjectDTO dto in list)
                 {
                     Console.WriteLine(dto);
                 }
@@ -94,7 +94,7 @@ namespace Designer.API.Controllers
         }
 
         [HttpPost("renameProject")]
-        public IActionResult RenameProject([FromBody] ProjectDTO dto) 
+        public IActionResult RenameProject([FromBody] ProjectDTO dto)
         {
             try
             {
@@ -134,6 +134,31 @@ namespace Designer.API.Controllers
 
                 Console.WriteLine("");
                 Console.WriteLine("ProjectController.DeleteProject(ProjectDTO).end".Pastel(Color.Yellow));
+                Console.WriteLine("HttpPost response: Ok()");
+
+                return Ok();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpPost("updateLastUpdateDate")]
+        public IActionResult UpdateLastUpdateDate([FromBody] ProjectDTO dto)
+        {
+            try
+            {
+                Console.WriteLine("");
+                Console.WriteLine("HttpPost request:");
+                Console.WriteLine("ProjectController.UpdateLastUpdateDate(ProjectDTO).start".Pastel(Color.Yellow));
+                Console.WriteLine(dto);
+                Console.WriteLine("");
+
+                _projectService.UpdateLastUpdateDate(dto);
+
+                Console.WriteLine("");
+                Console.WriteLine("ProjectController.UpdateLastUpdateDate(ProjectDTO).end".Pastel(Color.Yellow));
                 Console.WriteLine("HttpPost response: Ok()");
 
                 return Ok();

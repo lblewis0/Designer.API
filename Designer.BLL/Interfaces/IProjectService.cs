@@ -19,5 +19,7 @@ namespace Designer.BLL.Interfaces
 
         void DeleteProject(ProjectDTO dto);
 
+        void UpdateLastUpdateDate(ProjectDTO dto);
+
     }
 }

@@ -18,5 +18,7 @@ namespace Designer.DAL.Interfaces
         void Rename(Project project);
 
         void DeleteById(int id);
+
+        void UpdateLastUpdateDate(Project project);
     }
 }

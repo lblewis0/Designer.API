@@ -158,5 +158,24 @@ namespace Designer.DAL.Repositories
             Console.WriteLine("ProjectRepository.DeleteById(int id).end");
         }
 
+        public void UpdateLastUpdateDate(Project project)
+        {
+            Console.WriteLine("ProjectRepository.UpdateLastUpdateDate(Project project).start");
+
+            using (SqlCommand cmd = _connection.CreateCommand())
+            {
+                string sql = "UPDATE Projects SET LastUpdateDate=@lastUpdateDate WHERE Id=@id";
+                cmd.CommandText = sql;
+
+                cmd.Parameters.AddWithValue("lastUpdateDate", project.LastUpdateDate);
+                cmd.Parameters.AddWithValue("id", project.Id);
+
+                _connection.Open();
+                cmd.ExecuteNonQuery();
+                _connection.Close();
+            }
+
+            Console.WriteLine("ProjectRepository.UpdateLastUpdateDate(Project project).end");
+        }
     }
 }

@@ -104,5 +104,25 @@ namespace Designer.BLL.Services
             Console.WriteLine("ProjectService.DeleteProject(ProjectDTO).end");
 
         }
+
+        public void UpdateLastUpdateDate(ProjectDTO dto)
+        {
+            Console.WriteLine("ProjectService.UpdateLastUpdateDate(ProjectDTO).start");
+
+            DateTime parsedCreationDate = DateParser.ParseDate(dto.CreationDate);
+            DateTime parsedLastUpdateDate = DateParser.ParseDate(dto.LastUpdateDate);
+
+            Project newProject = new Project();
+
+            newProject.Id = dto.Id;
+            newProject.Name = dto.Name;
+            newProject.CreationDate = parsedCreationDate;
+            newProject.LastUpdateDate = parsedLastUpdateDate;
+            newProject.UserId = dto.UserId;
+
+            _projectRepository.UpdateLastUpdateDate(newProject);
+
+            Console.WriteLine("ProjectService.UpdateLastUpdateDate(ProjectDTO).end");
+        }
     }
 }
