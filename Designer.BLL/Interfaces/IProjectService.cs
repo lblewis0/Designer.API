@@ -15,5 +15,9 @@ namespace Designer.BLL.Interfaces
 
         List<ProjectDTO> GetAllProjectsByUserId(int id);
 
+        void RenameProject(ProjectDTO dto);
+
+        void DeleteProject(ProjectDTO dto);
+
     }
 }

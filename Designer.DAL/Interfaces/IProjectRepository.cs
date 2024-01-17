@@ -11,12 +11,12 @@ namespace Designer.DAL.Interfaces
     {
         void Create(Project project);
 
-        //void Delete(int id);
-
-        //Project GetById(int id);
-
         Project GetByUsername(int userId, string projectName);
 
         IEnumerable<Project> GetAllProjectsByUserId(int id);
+
+        void Rename(Project project);
+
+        void DeleteById(int id);
     }
 }

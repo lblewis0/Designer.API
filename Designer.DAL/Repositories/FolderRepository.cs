@@ -55,6 +55,23 @@ namespace Designer.DAL.Repositories
 
         }
 
+        public void DeleteByProjectId(int projectId)
+        {
+            Console.WriteLine("FolderRepository.DeleteByProjectId(int projectId).start");
 
+            using (SqlCommand cmd = _connection.CreateCommand())
+            {
+                string sql = "DELETE FROM Folders WHERE ProjectId=@projectId";
+
+                cmd.CommandText = sql;
+                cmd.Parameters.AddWithValue("projectId", projectId);
+
+                _connection.Open();
+                cmd.ExecuteNonQuery();
+                _connection.Close();
+            }
+
+            Console.WriteLine("FolderRepository.DeleteByProjectId(int projectId).end");
+        }
     }
 }

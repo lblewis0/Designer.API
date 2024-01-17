@@ -75,24 +75,34 @@ namespace Designer.BLL.Services
 
         }
 
-        //public DateTime ParseDate(string date)
-        //{
-        //    string format = "yyyy-MM-dd'T'HH:mm:ss.fff'Z'";
-        //    IFormatProvider provider = CultureInfo.InvariantCulture;
-        //    var styles = DateTimeStyles.None;
+        public void RenameProject(ProjectDTO dto)
+        {
+            Console.WriteLine("ProjectService.RenameProject(ProjectDTO).start");
 
-        //    DateTime parsedDate = new DateTime();
+            DateTime parsedCreationDate = DateParser.ParseDate(dto.CreationDate);
+            DateTime parsedLastUpdateDate = DateParser.ParseDate(dto.LastUpdateDate);
 
-        //    try
-        //    {
-        //        parsedDate = DateTime.ParseExact(date, format, provider, styles);
-        //    }
-        //    catch(FormatException e)
-        //    {
-        //        Console.WriteLine(e.Message);
-        //    }
+            Project newProject = new Project();
 
-        //    return parsedDate;
-        //}
+            newProject.Id = dto.Id;
+            newProject.Name = dto.Name;
+            newProject.CreationDate = parsedCreationDate;
+            newProject.LastUpdateDate = parsedLastUpdateDate;
+            newProject.UserId = dto.UserId;
+
+            _projectRepository.Rename(newProject);
+
+            Console.WriteLine("ProjectService.RenameProject(ProjectDTO).end");
+        }
+
+        public void DeleteProject(ProjectDTO dto)
+        {
+            Console.WriteLine("ProjectService.DeleteProject(ProjectDTO).start");
+
+            _projectRepository.DeleteById(dto.Id);
+
+            Console.WriteLine("ProjectService.DeleteProject(ProjectDTO).end");
+
+        }
     }
 }

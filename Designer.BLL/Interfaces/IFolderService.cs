@@ -10,5 +10,7 @@ namespace Designer.BLL.Interfaces
     public interface IFolderService
     {
         void CreateFolder(FolderDTO dto);
+
+        void DeleteByProjectId(int id);
     }
 }

@@ -10,5 +10,7 @@ namespace Designer.DAL.Interfaces
     public interface IFolderRepository
     {
         void Create(Folder folder);
+
+        void DeleteByProjectId(int projectId);
     }
 }

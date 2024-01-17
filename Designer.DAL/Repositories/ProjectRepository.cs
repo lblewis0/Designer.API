@@ -105,5 +105,58 @@ namespace Designer.DAL.Repositories
             return projects;
         }
 
+        public void Rename(Project project)
+        {
+            Console.WriteLine("ProjectRepository.Rename(Project project).start");
+
+            using (SqlCommand cmd = _connection.CreateCommand())
+            {
+                string sql = "UPDATE Projects SET Name=@name WHERE Id=@id";
+                cmd.CommandText = sql;
+
+                cmd.Parameters.AddWithValue("name", project.Name);
+                cmd.Parameters.AddWithValue("id", project.Id);
+
+                _connection.Open();
+                cmd.ExecuteNonQuery();
+                _connection.Close();
+            }
+
+            using (SqlCommand cmd = _connection.CreateCommand())
+            {
+                string sql = "UPDATE Projects SET LastUpdateDate=@lastUpdateDate WHERE Id=@id";
+                cmd.CommandText = sql;
+
+                cmd.Parameters.AddWithValue("lastUpdateDate", project.LastUpdateDate);
+                cmd.Parameters.AddWithValue("id", project.Id);
+
+                _connection.Open();
+                cmd.ExecuteNonQuery();
+                _connection.Close();
+            }
+
+            Console.WriteLine("ProjectRepository.Rename(Project project).end");
+
+        }
+
+        public void DeleteById(int id)
+        {
+            Console.WriteLine("ProjectRepository.DeleteById(int id).start");
+
+            using (SqlCommand cmd = _connection.CreateCommand())
+            {
+                string sql = "DELETE FROM Projects WHERE Id=@id";
+                cmd.CommandText = sql;
+
+                cmd.Parameters.AddWithValue("id", id);
+
+                _connection.Open();
+                cmd.ExecuteNonQuery();
+                _connection.Close();
+            }
+
+            Console.WriteLine("ProjectRepository.DeleteById(int id).end");
+        }
+
     }
 }

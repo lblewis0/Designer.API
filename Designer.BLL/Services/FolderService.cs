@@ -41,5 +41,14 @@ namespace Designer.BLL.Services
 
             Console.WriteLine("FolderService.CreateFolder(FolderDTO).end");
         }
+
+        public void DeleteByProjectId(int id)
+        {
+            Console.WriteLine("FolderService.DeleteByProjectId(int id).start");
+
+            _folderRepository.DeleteByProjectId(id);
+
+            Console.WriteLine("FolderService.DeleteByProjectId(int id).end");
+        }
     }
 }

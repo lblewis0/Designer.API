@@ -93,6 +93,56 @@ namespace Designer.API.Controllers
             }
         }
 
+        [HttpPost("renameProject")]
+        public IActionResult RenameProject([FromBody] ProjectDTO dto) 
+        {
+            try
+            {
+                Console.WriteLine("");
+                Console.WriteLine("HttpPost request:");
+                Console.WriteLine("ProjectController.RenameProject(ProjectDTO).start".Pastel(Color.Yellow));
+                Console.WriteLine(dto);
+                Console.WriteLine("");
+
+                _projectService.RenameProject(dto);
+
+                Console.WriteLine("");
+                Console.WriteLine("ProjectController.RenameProject(ProjectDTO).end".Pastel(Color.Yellow));
+                Console.WriteLine("HttpPost response: Ok()");
+
+                return Ok();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpPost("deleteProject")]
+        public IActionResult DeleteProject([FromBody] ProjectDTO dto)
+        {
+            try
+            {
+                Console.WriteLine("");
+                Console.WriteLine("HttpPost request:");
+                Console.WriteLine("ProjectController.DeleteProject(ProjectDTO).start".Pastel(Color.Yellow));
+                Console.WriteLine(dto);
+                Console.WriteLine("");
+
+                _folderService.DeleteByProjectId(dto.Id);
+                _projectService.DeleteProject(dto);
+
+                Console.WriteLine("");
+                Console.WriteLine("ProjectController.DeleteProject(ProjectDTO).end".Pastel(Color.Yellow));
+                Console.WriteLine("HttpPost response: Ok()");
+
+                return Ok();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 
 }
