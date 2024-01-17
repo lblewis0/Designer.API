@@ -73,5 +73,38 @@ namespace Designer.DAL.Repositories
 
             Console.WriteLine("FolderRepository.DeleteByProjectId(int projectId).end");
         }
+
+        public void Rename(Folder folder)
+        {
+            Console.WriteLine("FolderRepository.Rename(Folder folder).start");
+
+            using (SqlCommand cmd = _connection.CreateCommand())
+            {
+                string sql = "UPDATE Projects SET Name=@name WHERE Id=@id";
+                cmd.CommandText = sql;
+
+                cmd.Parameters.AddWithValue("name", folder.Name);
+                cmd.Parameters.AddWithValue("id", folder.Id);
+
+                _connection.Open();
+                cmd.ExecuteNonQuery();
+                _connection.Close();
+            }
+
+            using (SqlCommand cmd = _connection.CreateCommand())
+            {
+                string sql = "UPDATE Projects SET LastUpdateDate=@lastUpdateDate WHERE Id=@id";
+                cmd.CommandText = sql;
+
+                cmd.Parameters.AddWithValue("lastUpdateDate", folder.LastUpdateDate);
+                cmd.Parameters.AddWithValue("id", folder.Id);
+
+                _connection.Open();
+                cmd.ExecuteNonQuery();
+                _connection.Close();
+            }
+
+            Console.WriteLine("FolderRepository.Rename(Folder folder).end");
+        }
     }
 }

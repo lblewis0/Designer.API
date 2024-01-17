@@ -12,5 +12,7 @@ namespace Designer.BLL.Interfaces
         void CreateFolder(FolderDTO dto);
 
         void DeleteByProjectId(int id);
+
+        void RenameFolder(FolderDTO dto);
     }
 }

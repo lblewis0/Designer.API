@@ -44,26 +44,46 @@ namespace Designer.API.Controllers
             }
         }
 
-        [HttpPost("getFolders")]
-        public IActionResult getFolders([FromBody] ProjectDTO dto)
+        [HttpPost("renameFolder")]
+        public IActionResult RenameFolder([FromBody] FolderDTO dto)
         {
             try
             {
                 Console.WriteLine("");
                 Console.WriteLine("HttpPost request:");
-                Console.WriteLine("FolderController.getFolders(ProjectDTO).start".Pastel(Color.Yellow));
+                Console.WriteLine("FolderController.RenameFolder(FolderDTO).start".Pastel(Color.Yellow));
+                Console.WriteLine(dto);
+                Console.WriteLine("");
+
+                _folderService.RenameFolder(dto);
+
+                Console.WriteLine("");
+                Console.WriteLine("FolderController.RenameFolder(FolderDTO).end".Pastel(Color.Yellow));
+                Console.WriteLine("HttpPost response: Ok()");
+
+                return Ok();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpPost("getFolders")]
+        public IActionResult getMainFolder([FromBody] ProjectDTO dto)
+        {
+            try
+            {
+                Console.WriteLine("");
+                Console.WriteLine("HttpPost request:");
+                Console.WriteLine("FolderController.getMainFolder(ProjectDTO).start".Pastel(Color.Yellow));
                 Console.WriteLine("");
 
                 //List<FolderDTO> list = _folderService.GetAllProjectsByProjectId(token.UserDTO.Id);
 
                 Console.WriteLine("");
-                Console.WriteLine("FolderController.getFolders(ProjectDTO).end".Pastel(Color.Yellow));
-                Console.WriteLine("HttpPost response: List<Projects>");
-
-                //foreach (FolderDTO dto in list)
-                //{
-                //    Console.WriteLine(dto);
-                //}
+                Console.WriteLine("FolderController.getMainFolder(ProjectDTO).end".Pastel(Color.Yellow));
+                Console.WriteLine("HttpPost response: FolderDTO");
 
                 return Ok();
             }

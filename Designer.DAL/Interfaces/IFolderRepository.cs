@@ -12,5 +12,7 @@ namespace Designer.DAL.Interfaces
         void Create(Folder folder);
 
         void DeleteByProjectId(int projectId);
+
+        void Rename(Folder folder);
     }
 }

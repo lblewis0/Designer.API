@@ -50,5 +50,26 @@ namespace Designer.BLL.Services
 
             Console.WriteLine("FolderService.DeleteByProjectId(int id).end");
         }
+
+        public void RenameFolder(FolderDTO dto) 
+        {
+            Console.WriteLine("FolderService.RenameFolder(FolderDTO).start");
+
+            DateTime parsedCreationDate = DateParser.ParseDate(dto.CreationDate);
+            DateTime parsedLastUpdateDate = DateParser.ParseDate(dto.LastUpdateDate);
+
+            Folder newFolder = new Folder();
+
+            newFolder.Id = dto.Id;
+            newFolder.Name = dto.Name;
+            newFolder.CreationDate = parsedCreationDate;
+            newFolder.LastUpdateDate = parsedLastUpdateDate;
+            newFolder.ProjectId = dto.ProjectId;
+            newFolder.ParentFolderId = dto.ParentFolderId;
+
+            _folderRepository.Rename(newFolder);
+
+            Console.WriteLine("FolderService.RenameFolder(FolderDTO).end");
+        }
     }
 }
