@@ -69,7 +69,7 @@ namespace Designer.API.Controllers
             }
         }
 
-        [HttpPost("getFolders")]
+        [HttpPost("getMainFolder")]
         public IActionResult getMainFolder([FromBody] ProjectDTO dto)
         {
             try
