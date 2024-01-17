@@ -11,6 +11,8 @@ namespace Designer.BLL.Interfaces
     {
         void CreateProject(ProjectDTO dto);
 
+        ProjectDTO GetProjectByUsername(int userId, string projectName);
+
         List<ProjectDTO> GetAllProjectsByUserId(int id);
 
     }

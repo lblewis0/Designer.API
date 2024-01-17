@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Designer.BLL.DTO;
 using Designer.BLL.Interfaces;
 using Designer.DAL.Interfaces;
+using Designer.BLL.Utils;
 using Designer.DAL.Models;
 using Microsoft.AspNetCore.Http;
 using Pastel;
@@ -27,8 +28,8 @@ namespace Designer.BLL.Services
         {
             Console.WriteLine("ProjectService.CreateProject(ProjectDTO).start");
 
-            DateTime parsedCreationDate = ParseDate(dto.CreationDate);
-            DateTime parsedLastUpdateDate = ParseDate(dto.LastUpdateDate);
+            DateTime parsedCreationDate = DateParser.ParseDate(dto.CreationDate);
+            DateTime parsedLastUpdateDate = DateParser.ParseDate(dto.LastUpdateDate);
 
             Project newProject = new Project();
 
@@ -41,6 +42,18 @@ namespace Designer.BLL.Services
             _projectRepository.Create(newProject);
 
             Console.WriteLine("ProjectService.CreateProject(ProjectDTO).end");
+
+        }
+
+        public ProjectDTO GetProjectByUsername(int userId, string projectName)
+        {
+            Console.WriteLine("ProjectService.GetProjectByUsername(int userId, string projectName).start");
+
+            ProjectDTO dto = new ProjectDTO(_projectRepository.GetByUsername(userId, projectName));
+
+            Console.WriteLine("ProjectService.GetProjectByUsername(int userId, string projectName).end");
+
+            return dto;
 
         }
 
@@ -62,24 +75,24 @@ namespace Designer.BLL.Services
 
         }
 
-        public DateTime ParseDate(string date)
-        {
-            string format = "yyyy-MM-dd'T'HH:mm:ss.fff'Z'";
-            IFormatProvider provider = CultureInfo.InvariantCulture;
-            var styles = DateTimeStyles.None;
+        //public DateTime ParseDate(string date)
+        //{
+        //    string format = "yyyy-MM-dd'T'HH:mm:ss.fff'Z'";
+        //    IFormatProvider provider = CultureInfo.InvariantCulture;
+        //    var styles = DateTimeStyles.None;
 
-            DateTime parsedDate = new DateTime();
+        //    DateTime parsedDate = new DateTime();
 
-            try
-            {
-                parsedDate = DateTime.ParseExact(date, format, provider, styles);
-            }
-            catch(FormatException e)
-            {
-                Console.WriteLine(e.Message);
-            }
+        //    try
+        //    {
+        //        parsedDate = DateTime.ParseExact(date, format, provider, styles);
+        //    }
+        //    catch(FormatException e)
+        //    {
+        //        Console.WriteLine(e.Message);
+        //    }
 
-            return parsedDate;
-        }
+        //    return parsedDate;
+        //}
     }
 }

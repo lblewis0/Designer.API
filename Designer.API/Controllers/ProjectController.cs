@@ -12,10 +12,14 @@ namespace Designer.API.Controllers
     public class ProjectController : ControllerBase
     {
         private readonly IProjectService _projectService;
+        private readonly IFolderService _folderService;
+        private readonly IUserService _userService;
 
-        public ProjectController(IProjectService projectService)
+        public ProjectController(IProjectService projectService, IFolderService folderService, IUserService userService)
         {
             _projectService = projectService;
+            _folderService = folderService;
+            _userService = userService;
         }
 
         [HttpPost("createProject")]
@@ -31,11 +35,29 @@ namespace Designer.API.Controllers
 
                 _projectService.CreateProject(dto);
 
+                ProjectDTO dtoAfter = _projectService.GetProjectByUsername(dto.UserId, dto.Name);
+
+                UserDTO user = _userService.GetById(dto.UserId);
+                user.ActiveProjectId = dtoAfter.Id;
+
+                _userService.UpdateUserActiveProject(user);
+
+                FolderDTO mainFolder = new FolderDTO();
+
+                mainFolder.Name = dto.Name;
+                mainFolder.CreationDate = dto.CreationDate;
+                mainFolder.LastUpdateDate = dto.LastUpdateDate;
+                mainFolder.ProjectId = dtoAfter.Id;
+                mainFolder.ParentFolderId = 0;
+
+                _folderService.CreateFolder(mainFolder);
+
                 Console.WriteLine("");
                 Console.WriteLine("ProjectController.CreateProject(ProjectDTO).end".Pastel(Color.Yellow));
-                Console.WriteLine("HttpPost response: Ok()");
+                Console.WriteLine("HttpPost response: Ok(UserDTO)");
+                Console.WriteLine(user);
 
-                return Ok();
+                return Ok(user);
             }
             catch (Exception)
             {

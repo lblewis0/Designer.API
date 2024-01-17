@@ -31,5 +31,18 @@ namespace Designer.BLL.Services
             Console.WriteLine("UserService.UpdateUserActiveProject(UserDTO, int).end");
 
         }
+
+        public UserDTO GetById(int id)
+        {
+            Console.WriteLine("UserService.GetById(int id).start");
+
+            User user = _userRepository.GetById(id);
+            UserDTO dto = new UserDTO(user);
+
+            Console.WriteLine("UserService.GetById(int id).end");
+
+            return dto;
+
+        }
     }
 }

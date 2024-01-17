@@ -21,6 +21,8 @@ namespace Designer.BLL.DTO
 
         public int UserId { get; set; }
 
+        public bool IsEditable { get; set; }
+
         public ProjectDTO(Project project) 
         { 
             Id = project.Id;
@@ -28,6 +30,7 @@ namespace Designer.BLL.DTO
             CreationDate = project.CreationDate.ToString();
             LastUpdateDate = project.LastUpdateDate.ToString();
             UserId = project.UserId;
+            IsEditable = false;
         }
 
         public ProjectDTO() 
@@ -42,7 +45,8 @@ namespace Designer.BLL.DTO
                    $"   Name: {Name.Pastel(Color.Green)}\n" +
                    $"   CreationDate: {CreationDate.ToString().Pastel(Color.Green)}\n" +
                    $"   LastUpdateDate: {LastUpdateDate.ToString().Pastel(Color.Green)}\n" +
-                   $"   UserId: {UserId.ToString().Pastel(Color.Green)}";
+                   $"   UserId: {UserId.ToString().Pastel(Color.Green)}\n" +
+                   $"   IsEditable: {IsEditable.ToString().Pastel(Color.Green)}";
         }
     }
 }

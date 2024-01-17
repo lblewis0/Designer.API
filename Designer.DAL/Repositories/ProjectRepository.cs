@@ -54,6 +54,32 @@ namespace Designer.DAL.Repositories
 
         }
 
+        public Project GetByUsername(int userId, string projectName)
+        {
+            Console.WriteLine("ProjectRepository.GetProjectByUsername(int userId, string projectName).start");
+            Project project = null;
+
+            using (SqlCommand cmd = _connection.CreateCommand())
+            {
+                string sql = "SELECT * FROM Projects where UserId = @userId and Name = @projectName";
+                cmd.CommandText = sql;
+                cmd.Parameters.AddWithValue("userId", userId);
+                cmd.Parameters.AddWithValue("projectName", projectName);
+
+                _connection.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if(reader.Read())
+                    {
+                        project = Mapper(reader);
+                    }
+                }
+                _connection.Close();
+            }
+            Console.WriteLine("ProjectRepository.GetProjectByUsername(int userId, string projectName).end");
+            return project;
+        }
+
         public IEnumerable<Project> GetAllProjectsByUserId(int id)
         {
             Console.WriteLine("ProjectRepository.GetAllProjectsByUserId(int id).start");

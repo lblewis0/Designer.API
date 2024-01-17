@@ -19,6 +19,7 @@ namespace Designer.BLL.DependencyInjection
             services.AddScoped<JwtSecurityTokenHandler>();
             services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<IAuthentificationService, AuthentificationService>();
+            services.AddScoped<IFolderService, FolderService>();
             services.AddScoped<IProjectService, ProjectService>();
             services.AddScoped<IUserService, UserService>();
             return services;

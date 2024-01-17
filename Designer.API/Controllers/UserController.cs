@@ -31,17 +31,19 @@ namespace Designer.API.Controllers
                 Console.WriteLine("");
 
                 _userService.UpdateUserActiveProject(dto.UserDTO);
+                UserDTO newDTO = _userService.GetById(dto.UserDTO.Id);
 
                 Console.WriteLine("");
                 Console.WriteLine("UserController.UpdateActiveProject(TokenDTO).end".Pastel(Color.Yellow));
                 Console.WriteLine("HttpPost response: Ok()");
 
-                return Ok();
+                return Ok(newDTO);
             }
             catch (Exception)
             {
                 throw;
             }
         }
+
     }
 }

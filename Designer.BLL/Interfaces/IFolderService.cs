@@ -1,5 +1,4 @@
 ﻿using Designer.BLL.DTO;
-using Designer.DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace Designer.BLL.Interfaces
 {
-    public interface IUserService
+    public interface IFolderService
     {
-        void UpdateUserActiveProject(UserDTO user);
-
-        UserDTO GetById(int id);
+        void CreateFolder(FolderDTO dto);
     }
 }
