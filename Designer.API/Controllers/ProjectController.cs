@@ -48,6 +48,9 @@ namespace Designer.API.Controllers
                 mainFolder.CreationDate = dto.CreationDate;
                 mainFolder.LastUpdateDate = dto.LastUpdateDate;
                 mainFolder.ProjectId = dtoAfter.Id;
+                mainFolder.IsEditable = false;
+                mainFolder.IsSelected = false;
+                mainFolder.IsExpanded = false;
                 mainFolder.ParentFolderId = 0;
 
                 _folderService.CreateFolder(mainFolder);

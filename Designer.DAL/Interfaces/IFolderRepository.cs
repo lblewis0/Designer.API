@@ -14,5 +14,9 @@ namespace Designer.DAL.Interfaces
         void DeleteByProjectId(int projectId);
 
         void Rename(Folder folder);
+
+        Folder GetByProjectId(Project project);
+
+        List<Folder> GetByParentFolder(Folder folder);
     }
 }

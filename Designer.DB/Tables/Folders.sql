@@ -6,6 +6,9 @@
 	[LastUpdateDate] DATETIME NOT NULL,
 	[ProjectId] INT NOT NULL,
 	[ParentFolderId] INT,
+	[IsEditable] BIT NOT NULL,
+	[IsSelected] BIT NOT NULL,
+	[IsExpanded] BIT NOT NULL,
 	CONSTRAINT [PK_Folders] PRIMARY KEY CLUSTERED ([Id]),
 	CONSTRAINT [FK_Folders_Project] FOREIGN KEY ([ProjectId]) REFERENCES [dbo].[Projects]([Id])
 )

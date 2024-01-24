@@ -19,5 +19,11 @@ namespace Designer.DAL.Models
         public int ProjectId { get; set; }
 
         public int ParentFolderId { get; set; }
+
+        public bool IsEditable { get; set; }
+
+        public bool IsSelected { get; set; }
+
+        public bool IsExpanded { get; set; }
     }
 }

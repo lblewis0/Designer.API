@@ -14,5 +14,9 @@ namespace Designer.BLL.Interfaces
         void DeleteByProjectId(int id);
 
         void RenameFolder(FolderDTO dto);
+
+        FolderDTO GetByProjectId(ProjectDTO dto);
+
+        List<FolderDTO> GetByParentFolder(FolderDTO dto);
     }
 }

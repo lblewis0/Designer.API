@@ -26,7 +26,10 @@ namespace Designer.DAL.Repositories
                 CreationDate = (DateTime)reader["CreationDate"],
                 LastUpdateDate = (DateTime)reader["LastUpdateDate"],
                 ProjectId = (int)reader["ProjectId"],
-                ParentFolderId = (int)reader["ParentFolderId"]
+                ParentFolderId = (int)reader["ParentFolderId"],
+                IsEditable = (bool)reader["IsEditable"],
+                IsSelected = (bool)reader["IsSelected"],
+                IsExpanded = (bool)reader["IsExpanded"]
             };
         }
 
@@ -36,8 +39,8 @@ namespace Designer.DAL.Repositories
 
             using (SqlCommand cmd = _connection.CreateCommand())
             {
-                string sql = "INSERT INTO Folders (Name, CreationDate, LastUpdateDate, ProjectId, ParentFolderId)" +
-                    "VALUES (@name, @creationDate, @lastUpdateDate, @projectId, @parentFolderId)";
+                string sql = "INSERT INTO Folders (Name, CreationDate, LastUpdateDate, ProjectId, ParentFolderId, IsEditable, IsSelected, IsExpanded)" +
+                    "VALUES (@name, @creationDate, @lastUpdateDate, @projectId, @parentFolderId, @isEditable, @isSelected, @isExpanded)";
 
                 cmd.CommandText = sql;
                 cmd.Parameters.AddWithValue("name", folder.Name);
@@ -45,6 +48,9 @@ namespace Designer.DAL.Repositories
                 cmd.Parameters.AddWithValue("lastUpdateDate", folder.LastUpdateDate);
                 cmd.Parameters.AddWithValue("projectId", folder.ProjectId);
                 cmd.Parameters.AddWithValue("parentFolderId", folder.ParentFolderId);
+                cmd.Parameters.AddWithValue("isEditable", folder.IsEditable);
+                cmd.Parameters.AddWithValue("isSelected", folder.IsSelected);
+                cmd.Parameters.AddWithValue("isExpanded", folder.IsExpanded);
 
                 _connection.Open();
                 cmd.ExecuteNonQuery();
@@ -105,6 +111,56 @@ namespace Designer.DAL.Repositories
             }
 
             Console.WriteLine("FolderRepository.Rename(Folder folder).end");
+        }
+
+        public Folder GetByProjectId(Project project)
+        {
+            Console.WriteLine("FolderRepository.GetByProjectId(Project project).start");
+            Folder folder = null;
+
+            using (SqlCommand cmd = _connection.CreateCommand())
+            {
+                string sql = "SELECT * FROM Folders where ProjectId = @projectId and ParentFolderId = 0";
+                cmd.CommandText = sql;
+                cmd.Parameters.AddWithValue("projectId", project.Id);
+
+                _connection.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        folder = Mapper(reader);
+                    }
+                }
+                _connection.Close();
+            }
+            Console.WriteLine("FolderRepository.GetByProjectId(Project project).end");
+            return folder;
+        }
+
+        public List<Folder> GetByParentFolder(Folder folder)
+        {
+            Console.WriteLine("FolderRepository.GetByParentFolder(Folder folder).start");
+
+            List<Folder> folders = new List<Folder>();
+            using (SqlCommand cmd = _connection.CreateCommand())
+            {
+                string sql = "SELECT * FROM folders where ParentFolderId = @id";
+                cmd.CommandText = sql;
+                cmd.Parameters.AddWithValue("id", folder.Id);
+
+                _connection.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        folders.Add(Mapper(reader));
+                    }
+                }
+                _connection.Close();
+            }
+            Console.WriteLine("FolderRepository.GetByParentFolder(Folder folder).end");
+            return folders;
         }
     }
 }

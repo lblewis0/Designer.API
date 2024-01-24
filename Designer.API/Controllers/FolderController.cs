@@ -1,4 +1,5 @@
 ﻿using Designer.BLL.DTO;
+using Designer.BLL.Exceptions;
 using Designer.BLL.Interfaces;
 using Designer.BLL.Services;
 using Microsoft.AspNetCore.Http;
@@ -69,8 +70,8 @@ namespace Designer.API.Controllers
             }
         }
 
-        [HttpPost("getMainFolder")]
-        public IActionResult getMainFolder([FromBody] ProjectDTO dto)
+        [HttpPost("getFolderByProjectId")]
+        public IActionResult getFolderByProjectId([FromBody] ProjectDTO dto)
         {
             try
             {
@@ -79,19 +80,49 @@ namespace Designer.API.Controllers
                 Console.WriteLine("FolderController.getMainFolder(ProjectDTO).start".Pastel(Color.Yellow));
                 Console.WriteLine("");
 
-                //List<FolderDTO> list = _folderService.GetAllProjectsByProjectId(token.UserDTO.Id);
+                FolderDTO folder = _folderService.GetByProjectId(dto);
 
                 Console.WriteLine("");
                 Console.WriteLine("FolderController.getMainFolder(ProjectDTO).end".Pastel(Color.Yellow));
                 Console.WriteLine("HttpPost response: FolderDTO");
+                Console.WriteLine(folder);
 
-                return Ok();
+                return Ok(folder);
             }
             catch (Exception)
             {
                 throw;
             }
 
+        }
+
+        [HttpPost("getFoldersByParentFolder")]
+        public IActionResult getFoldersByParentFolder([FromBody] FolderDTO dto)
+        {
+            try
+            {
+                Console.WriteLine("");
+                Console.WriteLine("HttpPost request:");
+                Console.WriteLine("FolderController.getFoldersByParentFolder(FolderDTO).start".Pastel(Color.Yellow));
+                Console.WriteLine("");
+
+                List<FolderDTO> folders = _folderService.GetByParentFolder(dto);
+
+                Console.WriteLine("");
+                Console.WriteLine("FolderController.getFoldersByParentFolder(FolderDTO).end".Pastel(Color.Yellow));
+                Console.WriteLine("HttpPost response: List<FolderDTO>");
+                Console.WriteLine(folders);
+
+                return Ok(folders);
+            }
+            catch (NoFoldersFoundException)
+            {
+                return NotFound(new { message = "FoldersNotFound" });
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }
