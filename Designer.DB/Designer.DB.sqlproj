@@ -63,6 +63,7 @@
     <Build Include="Tables\Users.sql" />
     <Build Include="Tables\Projects.sql" />
     <Build Include="Tables\Folders.sql" />
+    <Build Include="Tables\Components.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.sql" />
