@@ -71,7 +71,7 @@ namespace Designer.API.Controllers
         }
 
         [HttpPost("getFolderByProjectId")]
-        public IActionResult getFolderByProjectId([FromBody] ProjectDTO dto)
+        public IActionResult GetFolderByProjectId([FromBody] ProjectDTO dto)
         {
             try
             {
@@ -97,7 +97,7 @@ namespace Designer.API.Controllers
         }
 
         [HttpPost("getFoldersByParentFolder")]
-        public IActionResult getFoldersByParentFolder([FromBody] FolderDTO dto)
+        public IActionResult GetFoldersByParentFolder([FromBody] FolderDTO dto)
         {
             try
             {

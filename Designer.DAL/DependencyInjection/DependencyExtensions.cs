@@ -16,6 +16,7 @@ namespace Designer.DAL.DependencyInjection
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IProjectRepository, ProjectRepository>();
             services.AddScoped<IFolderRepository, FolderRepository>();
+            services.AddScoped<IComponentRepository, ComponentRepository>();
             return services;
         }
     }
