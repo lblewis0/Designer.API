@@ -65,7 +65,10 @@ namespace Designer.API.Controllers
                 if (components.Count > 0)
                 {
                     Console.WriteLine("HttpPost response: List<ComponentDTO>");
-                    Console.WriteLine(components);
+                    foreach (var c in components)
+                    {
+                        Console.WriteLine(c);
+                    }
                 }
                 else
                 {

@@ -11,7 +11,18 @@ namespace Designer.BLL.Utils
     {
         public static DateTime ParseDate(string date)
         {
-            string format = "yyyy-MM-dd'T'HH:mm:ss.fff'Z'";
+            string lastChar = date.Substring(date.Length - 1);
+            string format;
+
+            if(lastChar == "Z")
+            {
+                format = "yyyy-MM-dd'T'HH:mm:ss.fff'Z'";
+            }
+            else
+            {
+                format = "dd-MM-yy HH:mm:ss";
+            }
+            
             IFormatProvider provider = CultureInfo.InvariantCulture;
             var styles = DateTimeStyles.None;
 
@@ -27,6 +38,7 @@ namespace Designer.BLL.Utils
             }
 
             return parsedDate;
+
         }
     }
 }

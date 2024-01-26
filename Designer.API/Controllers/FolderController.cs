@@ -77,13 +77,13 @@ namespace Designer.API.Controllers
             {
                 Console.WriteLine("");
                 Console.WriteLine("HttpPost request:");
-                Console.WriteLine("FolderController.getMainFolder(ProjectDTO).start".Pastel(Color.Yellow));
+                Console.WriteLine("FolderController.getFolderByProjectId(ProjectDTO).start".Pastel(Color.Yellow));
                 Console.WriteLine("");
 
                 FolderDTO folder = _folderService.GetByProjectId(dto);
 
                 Console.WriteLine("");
-                Console.WriteLine("FolderController.getMainFolder(ProjectDTO).end".Pastel(Color.Yellow));
+                Console.WriteLine("FolderController.getFolderByProjectId(ProjectDTO).end".Pastel(Color.Yellow));
                 Console.WriteLine("HttpPost response: FolderDTO");
                 Console.WriteLine(folder);
 
@@ -104,6 +104,7 @@ namespace Designer.API.Controllers
                 Console.WriteLine("");
                 Console.WriteLine("HttpPost request:");
                 Console.WriteLine("FolderController.getFoldersByParentFolder(FolderDTO).start".Pastel(Color.Yellow));
+                Console.WriteLine(dto);
                 Console.WriteLine("");
 
                 List<FolderDTO> folders = _folderService.GetByParentFolder(dto);
@@ -115,7 +116,10 @@ namespace Designer.API.Controllers
                 if (folders.Count > 0)
                 {
                     Console.WriteLine("HttpPost response: List<FolderDTO>");
-                    Console.WriteLine(folders);
+                    foreach(var f in folders)
+                    {
+                        Console.WriteLine(f);
+                    }
                 }
                 else
                 {
