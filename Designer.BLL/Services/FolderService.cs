@@ -125,16 +125,13 @@ namespace Designer.BLL.Services
                     var newItem = new FolderDTO(item);
                     newList.Add(newItem);
                 }
-
-                Console.WriteLine("FolderService.GetByParentFolder(FolderDTO).end");
-                return newList;
-            }
-            else
-            {
-                throw new NoFoldersFoundException();
             }
 
-            
+            Console.WriteLine("FolderService.GetByParentFolder(FolderDTO).end");
+            return newList;
+
+
+
         }
     }
 }

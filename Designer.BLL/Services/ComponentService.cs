@@ -74,14 +74,10 @@ namespace Designer.BLL.Services
                     var newItem = new ComponentDTO(item);
                     newList.Add(newItem);
                 }
+            }
 
-                Console.WriteLine("ComponentService.GetComponentsByParentFolder(FolderDTO).end");
-                return newList;
-            }
-            else
-            {
-                throw new NoComponentsFoundException();
-            }
+            Console.WriteLine("ComponentService.GetComponentsByParentFolder(FolderDTO).end");
+            return newList;
 
             
         }

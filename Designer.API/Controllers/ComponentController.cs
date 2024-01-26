@@ -2,6 +2,7 @@
 using Designer.BLL.Exceptions;
 using Designer.BLL.Interfaces;
 using Designer.BLL.Services;
+using Designer.DAL.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Pastel;
@@ -45,7 +46,7 @@ namespace Designer.API.Controllers
             }
         }
 
-        [HttpPost("getComponentByParentFolder")]
+        [HttpPost("getComponentsByParentFolder")]
         public IActionResult GetComponentsByParentFolder([FromBody] FolderDTO dto)
         {
             try
@@ -60,19 +61,23 @@ namespace Designer.API.Controllers
 
                 Console.WriteLine("");
                 Console.WriteLine("ComponentController.GetComponentsByParentFolder(ComponentDTO).end".Pastel(Color.Yellow));
-                Console.WriteLine("HttpPost response: List<ComponentDTO>");
-                Console.WriteLine(components);
+
+                if (components.Count > 0)
+                {
+                    Console.WriteLine("HttpPost response: List<ComponentDTO>");
+                    Console.WriteLine(components);
+                }
+                else
+                {
+                    Console.WriteLine("HttpPost response: " + "ComponentsNotFound".Pastel(Color.Red));
+                }
 
                 return Ok(components);
                 //return Ok();
             }
-            catch (NoFoldersFoundException)
+            catch (NoComponentsFoundException)
             {
                 return NotFound(new { message = "ComponentsNotFound" });
-            }
-            catch (Exception)
-            {
-                throw;
             }
         }
     }

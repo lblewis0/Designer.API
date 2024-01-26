@@ -110,18 +110,24 @@ namespace Designer.API.Controllers
 
                 Console.WriteLine("");
                 Console.WriteLine("FolderController.getFoldersByParentFolder(FolderDTO).end".Pastel(Color.Yellow));
-                Console.WriteLine("HttpPost response: List<FolderDTO>");
-                Console.WriteLine(folders);
+                
+
+                if (folders.Count > 0)
+                {
+                    Console.WriteLine("HttpPost response: List<FolderDTO>");
+                    Console.WriteLine(folders);
+                }
+                else
+                {
+                    Console.WriteLine("HttpPost response: " + "FoldersNotFound".Pastel(Color.Red));
+                }
+                
 
                 return Ok(folders);
             }
             catch (NoFoldersFoundException)
             {
                 return NotFound(new { message = "FoldersNotFound" });
-            }
-            catch (Exception)
-            {
-                throw;
             }
         }
     }
