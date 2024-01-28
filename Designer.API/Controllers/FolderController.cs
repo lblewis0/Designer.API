@@ -31,13 +31,14 @@ namespace Designer.API.Controllers
                 Console.WriteLine(dto);
                 Console.WriteLine("");
 
-                _folderService.CreateFolder(dto);
+                FolderDTO returnDTO = _folderService.CreateFolder(dto);
+                returnDTO.IsEditable = true;
 
                 Console.WriteLine("");
                 Console.WriteLine("FolderController.CreateFolder(FolderDTO).end".Pastel(Color.Yellow));
                 Console.WriteLine("HttpPost response: Ok()");
 
-                return Ok();
+                return Ok(returnDTO);
             }
             catch (Exception)
             {

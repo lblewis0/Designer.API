@@ -1,4 +1,5 @@
 ﻿using Designer.BLL.DTO;
+using Designer.DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Designer.BLL.Interfaces
 {
     public interface IFolderService
     {
-        void CreateFolder(FolderDTO dto);
+        FolderDTO CreateFolder(FolderDTO dto);
 
         void DeleteByProjectId(int id);
 

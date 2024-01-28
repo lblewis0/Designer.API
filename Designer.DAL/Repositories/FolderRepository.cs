@@ -162,5 +162,57 @@ namespace Designer.DAL.Repositories
             Console.WriteLine("FolderRepository.GetByParentFolder(Folder folder).end");
             return folders;
         }
+
+        public List<Folder> GetByParentFolderIdAndNameLike(int parentFolderId, string name)
+        {
+            Console.WriteLine("FolderRepository.GetByParentFolderIdAndNameLike(int parentFolder, string name).start");
+
+            List<Folder> folders = new List<Folder>();
+            using (SqlCommand cmd = _connection.CreateCommand())
+            {
+                string sql = "SELECT * FROM folders WHERE ParentFolderId = @id AND Name LIKE @name";
+                cmd.CommandText = sql;
+                cmd.Parameters.AddWithValue("id", parentFolderId);
+                cmd.Parameters.AddWithValue("name", name + "%");
+
+                _connection.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        folders.Add(Mapper(reader));
+                    }
+                }
+                _connection.Close();
+            }
+            Console.WriteLine("FolderRepository.GetByParentFolderIdAndNameLike(int parentFolder, string name).end");
+            return folders;
+        }
+
+        public Folder GetByParentFolderIdAndName(int parentFolderId, string name)
+        {
+            Console.WriteLine("FolderRepository.GetByParentFolderIdAndName(int parentFolderId, string name).start");
+            Folder folder = null;
+
+            using (SqlCommand cmd = _connection.CreateCommand())
+            {
+                string sql = "SELECT * FROM Folders where ParentFolderId = @id and Name = @name";
+                cmd.CommandText = sql;
+                cmd.Parameters.AddWithValue("id", parentFolderId);
+                cmd.Parameters.AddWithValue("name", name);
+
+                _connection.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        folder = Mapper(reader);
+                    }
+                }
+                _connection.Close();
+            }
+            Console.WriteLine("FolderRepository.GetByParentFolderIdAndName(int parentFolderId, string name).end");
+            return folder;
+        }
     }
 }

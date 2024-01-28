@@ -22,7 +22,7 @@ namespace Designer.BLL.Services
             _folderRepository = folderRepository;
         }
 
-        public void CreateFolder(FolderDTO dto)
+        public FolderDTO CreateFolder(FolderDTO dto)
         {
             Console.WriteLine("FolderService.CreateFolder(FolderDTO).start");
 
@@ -40,10 +40,25 @@ namespace Designer.BLL.Services
             newFolder.IsSelected = dto.IsSelected;
             newFolder.IsExpanded = dto.IsExpanded;
 
+            List<Folder> newFoldersList = new List<Folder>();
+            newFoldersList = _folderRepository.GetByParentFolderIdAndNameLike(newFolder.ParentFolderId, newFolder.Name);
+
+            //vérifie si d'autres "newFolder" existe dans le dossier parent
+            //si oui, on change le nom en newFolder (2);
+            if(newFoldersList.Count > 0)
+            {
+                newFolder.Name = dto.Name + " (" + (newFoldersList.Count + 1).ToString() + ")";
+            }
 
             _folderRepository.Create(newFolder);
 
+            Folder newFolderWithId = new Folder();
+            newFolderWithId = _folderRepository.GetByParentFolderIdAndName(newFolder.ParentFolderId, newFolder.Name);
+
+            FolderDTO returnDTO = new FolderDTO(newFolderWithId);
+
             Console.WriteLine("FolderService.CreateFolder(FolderDTO).end");
+            return returnDTO;
         }
 
         public void DeleteByProjectId(int id)

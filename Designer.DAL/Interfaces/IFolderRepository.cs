@@ -18,5 +18,9 @@ namespace Designer.DAL.Interfaces
         Folder GetByProjectId(Project project);
 
         List<Folder> GetByParentFolder(Folder folder);
+
+        List<Folder> GetByParentFolderIdAndNameLike(int parentFolderId, string name);
+
+        Folder GetByParentFolderIdAndName(int parentFolderId, string name);
     }
 }
