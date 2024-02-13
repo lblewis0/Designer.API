@@ -3,6 +3,7 @@ using Designer.BLL.Exceptions;
 using Designer.BLL.Interfaces;
 using Designer.BLL.Services;
 using Designer.DAL.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Pastel;
@@ -12,6 +13,7 @@ namespace Designer.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize]
     public class ComponentController : ControllerBase
     {
         private readonly IComponentService _componentService;

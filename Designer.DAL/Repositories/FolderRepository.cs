@@ -170,10 +170,11 @@ namespace Designer.DAL.Repositories
             List<Folder> folders = new List<Folder>();
             using (SqlCommand cmd = _connection.CreateCommand())
             {
-                string sql = "SELECT * FROM folders WHERE ParentFolderId = @id AND Name LIKE @name";
+                string sql = "SELECT * FROM folders WHERE ParentFolderId = @id AND (Name LIKE @name OR Name = @name2)";
                 cmd.CommandText = sql;
                 cmd.Parameters.AddWithValue("id", parentFolderId);
-                cmd.Parameters.AddWithValue("name", name + "%");
+                cmd.Parameters.AddWithValue("name", name + " (%");
+                cmd.Parameters.AddWithValue("name2", name);
 
                 _connection.Open();
                 using (SqlDataReader reader = cmd.ExecuteReader())
