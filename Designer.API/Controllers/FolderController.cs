@@ -2,6 +2,7 @@
 using Designer.BLL.Exceptions;
 using Designer.BLL.Interfaces;
 using Designer.BLL.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Pastel;
@@ -11,6 +12,7 @@ namespace Designer.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize]
     public class FolderController : ControllerBase
     {
         private readonly IFolderService _folderService;
