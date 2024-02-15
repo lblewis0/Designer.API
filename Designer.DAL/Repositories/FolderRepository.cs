@@ -113,6 +113,26 @@ namespace Designer.DAL.Repositories
             Console.WriteLine("FolderRepository.Rename(Folder folder).end");
         }
 
+        public void UpdateLastUpdateDate(Folder folder)
+        {
+            Console.WriteLine("FolderRepository.UpdateLastUpdateDate(Folder folder).start");
+
+            using (SqlCommand cmd = _connection.CreateCommand())
+            {
+                string sql = "UPDATE Projects SET LastUpdateDate=@lastUpdateDate WHERE Id=@id";
+                cmd.CommandText = sql;
+
+                cmd.Parameters.AddWithValue("lastUpdateDate", folder.LastUpdateDate);
+                cmd.Parameters.AddWithValue("id", folder.Id);
+
+                _connection.Open();
+                cmd.ExecuteNonQuery();
+                _connection.Close();
+            }
+
+            Console.WriteLine("FolderRepository.UpdateLastUpdateDate(Folder folder).end");
+        }
+
         public Folder GetByProjectId(Project project)
         {
             Console.WriteLine("FolderRepository.GetByProjectId(Project project).start");

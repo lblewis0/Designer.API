@@ -15,6 +15,8 @@ namespace Designer.DAL.Interfaces
 
         void Rename(Folder folder);
 
+        void UpdateLastUpdateDate(Folder folder);
+
         Folder GetByProjectId(Project project);
 
         List<Folder> GetByParentFolder(Folder folder);

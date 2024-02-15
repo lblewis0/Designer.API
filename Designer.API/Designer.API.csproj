@@ -20,4 +20,8 @@
     <ProjectReference Include="..\Designer.BLL\Designer.BLL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Diagrams\" />
+  </ItemGroup>
+
 </Project>

@@ -93,6 +93,29 @@ namespace Designer.BLL.Services
             Console.WriteLine("FolderService.RenameFolder(FolderDTO).end");
         }
 
+        public void UpdateLastUpdateDate(FolderDTO dto)
+        {
+            Console.WriteLine("FolderService.UpdateLastUpdateDate(FolderDTO).start");
+
+            DateTime parsedCreationDate = DateParser.ParseDate(dto.CreationDate);
+            DateTime parsedLastUpdateDate = DateParser.ParseDate(dto.LastUpdateDate);
+
+            Folder newFolder = new Folder();
+
+            newFolder.Id = dto.Id;
+            newFolder.Name = dto.Name;
+            newFolder.CreationDate = parsedCreationDate;
+            newFolder.LastUpdateDate = parsedLastUpdateDate;
+            newFolder.ProjectId = dto.ProjectId;
+            newFolder.ParentFolderId = dto.ParentFolderId;
+            newFolder.IsSelected = dto.IsSelected;
+            newFolder.IsExpanded = dto.IsExpanded;
+
+            _folderRepository.UpdateLastUpdateDate(newFolder);
+
+            Console.WriteLine("FolderService.UpdateLastUpdateDate(FolderDTO).end");
+        }
+
         public FolderDTO GetByProjectId(ProjectDTO dto)
         {
             Console.WriteLine("FolderService.GetByProjectId(ProjectDTO).start");

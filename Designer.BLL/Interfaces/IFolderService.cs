@@ -16,6 +16,8 @@ namespace Designer.BLL.Interfaces
 
         void RenameFolder(FolderDTO dto);
 
+        void UpdateLastUpdateDate(FolderDTO dto);
+
         FolderDTO GetByProjectId(ProjectDTO dto);
 
         List<FolderDTO> GetByParentFolder(FolderDTO dto);

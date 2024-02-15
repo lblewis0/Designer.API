@@ -71,6 +71,31 @@ namespace Designer.API.Controllers
             }
         }
 
+        [HttpPost("updateLastUpdateDate")]
+        public IActionResult UpdateLastUpdateDate([FromBody] FolderDTO dto)
+        {
+            try
+            {
+                Console.WriteLine("");
+                Console.WriteLine("HttpPost request:");
+                Console.WriteLine("FolderController.UpdateLastUpdateDate(FolderDTO).start".Pastel(Color.Yellow));
+                Console.WriteLine(dto);
+                Console.WriteLine("");
+
+                _folderService.UpdateLastUpdateDate(dto);
+
+                Console.WriteLine("");
+                Console.WriteLine("FolderController.UpdateLastUpdateDate(FolderDTO).end".Pastel(Color.Yellow));
+                Console.WriteLine("HttpPost response: Ok()");
+
+                return Ok();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         [HttpPost("getFolderByProjectId")]
         public IActionResult GetFolderByProjectId([FromBody] ProjectDTO dto)
         {
