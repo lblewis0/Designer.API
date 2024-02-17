@@ -11,6 +11,10 @@ namespace Designer.DAL.Interfaces
     {
         void Create(Component component);
 
+        void UpdateIsSelected(Component component);
+
+        void UpdateIsExpanded(Component component);
+
         List<Component> GetByParentFolder(Folder folder);
     }
 }

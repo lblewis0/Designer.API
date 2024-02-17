@@ -18,6 +18,10 @@ namespace Designer.BLL.Interfaces
 
         void UpdateLastUpdateDate(FolderDTO dto);
 
+        void UpdateIsSelected(FolderDTO dto);
+
+        void UpdateIsExpanded(FolderDTO dto);
+
         FolderDTO GetByProjectId(ProjectDTO dto);
 
         List<FolderDTO> GetByParentFolder(FolderDTO dto);

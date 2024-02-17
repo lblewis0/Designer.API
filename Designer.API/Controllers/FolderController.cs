@@ -98,6 +98,56 @@ namespace Designer.API.Controllers
             }
         }
 
+        [HttpPost("updateIsSelected")]
+        public IActionResult UpdateIsSelected([FromBody] FolderDTO dto)
+        {
+            try
+            {
+                Console.WriteLine("");
+                Console.WriteLine("HttpPost request:");
+                Console.WriteLine("FolderController.UpdateIsSelected(FolderDTO).start".Pastel(Color.Yellow));
+                Console.WriteLine(dto);
+                Console.WriteLine("");
+
+                _folderService.UpdateIsSelected(dto);
+
+                Console.WriteLine("");
+                Console.WriteLine("FolderController.UpdateIsSelected(FolderDTO).end".Pastel(Color.Yellow));
+                Console.WriteLine("HttpPost response: Ok()");
+
+                return Ok();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpPost("updateIsExpanded")]
+        public IActionResult UpdateIsExpanded([FromBody] FolderDTO dto)
+        {
+            try
+            {
+                Console.WriteLine("");
+                Console.WriteLine("HttpPost request:");
+                Console.WriteLine("FolderController.UpdateIsExpanded(FolderDTO).start".Pastel(Color.Yellow));
+                Console.WriteLine(dto);
+                Console.WriteLine("");
+
+                _folderService.UpdateIsExpanded(dto);
+
+                Console.WriteLine("");
+                Console.WriteLine("FolderController.UpdateIsExpanded(FolderDTO).end".Pastel(Color.Yellow));
+                Console.WriteLine("HttpPost response: Ok()");
+
+                return Ok();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         [HttpPost("getFolderByProjectId")]
         public IActionResult GetFolderByProjectId([FromBody] ProjectDTO dto)
         {

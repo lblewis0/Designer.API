@@ -119,7 +119,7 @@ namespace Designer.DAL.Repositories
 
             using (SqlCommand cmd = _connection.CreateCommand())
             {
-                string sql = "UPDATE Projects SET LastUpdateDate=@lastUpdateDate WHERE Id=@id";
+                string sql = "UPDATE Folders SET LastUpdateDate=@lastUpdateDate WHERE Id=@id";
                 cmd.CommandText = sql;
 
                 cmd.Parameters.AddWithValue("lastUpdateDate", folder.LastUpdateDate);
@@ -132,6 +132,48 @@ namespace Designer.DAL.Repositories
 
             Console.WriteLine("FolderRepository.UpdateLastUpdateDate(Folder folder).end");
         }
+
+        public void UpdateIsSelected(Folder folder)
+        {
+            Console.WriteLine("FolderRepository.UpdateIsSelected(Folder folder).start");
+
+            using (SqlCommand cmd = _connection.CreateCommand())
+            {
+                string sql = "UPDATE Folders SET IsSelected=@isSelected WHERE Id=@id";
+                cmd.CommandText = sql;
+
+                cmd.Parameters.AddWithValue("isSelected", folder.IsSelected);
+                cmd.Parameters.AddWithValue("id", folder.Id);
+
+                _connection.Open();
+                cmd.ExecuteNonQuery();
+                _connection.Close();
+            }
+
+            Console.WriteLine("FolderRepository.UpdateIsSelected(Folder folder).end");
+        }
+
+        public void UpdateIsExpanded(Folder folder)
+        {
+            Console.WriteLine("FolderRepository.UpdateIsExpanded(Folder folder).start");
+
+            using (SqlCommand cmd = _connection.CreateCommand())
+            {
+                string sql = "UPDATE Folders SET IsExpanded=@isExpanded WHERE Id=@id";
+                cmd.CommandText = sql;
+
+                cmd.Parameters.AddWithValue("isExpanded", folder.IsExpanded);
+                cmd.Parameters.AddWithValue("id", folder.Id);
+
+                _connection.Open();
+                cmd.ExecuteNonQuery();
+                _connection.Close();
+            }
+
+            Console.WriteLine("FolderRepository.UpdateIsExpanded(Folder folder).end");
+        }
+
+
 
         public Folder GetByProjectId(Project project)
         {

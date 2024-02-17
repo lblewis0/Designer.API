@@ -48,6 +48,56 @@ namespace Designer.API.Controllers
             }
         }
 
+        [HttpPost("updateIsSelected")]
+        public IActionResult UpdateIsSelected([FromBody] ComponentDTO dto)
+        {
+            try
+            {
+                Console.WriteLine("");
+                Console.WriteLine("HttpPost request:");
+                Console.WriteLine("ComponentController.UpdateIsSelected(ComponentDTO).start".Pastel(Color.Yellow));
+                Console.WriteLine(dto);
+                Console.WriteLine("");
+
+                _componentService.UpdateIsSelected(dto);
+
+                Console.WriteLine("");
+                Console.WriteLine("ComponentController.UpdateIsSelected(ComponentDTO).end".Pastel(Color.Yellow));
+                Console.WriteLine("HttpPost response: Ok()");
+
+                return Ok();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpPost("updateIsExpanded")]
+        public IActionResult UpdateIsExpanded([FromBody] ComponentDTO dto)
+        {
+            try
+            {
+                Console.WriteLine("");
+                Console.WriteLine("HttpPost request:");
+                Console.WriteLine("ComponentController.UpdateIsExpanded(ComponentDTO).start".Pastel(Color.Yellow));
+                Console.WriteLine(dto);
+                Console.WriteLine("");
+
+                _componentService.UpdateIsExpanded(dto);
+
+                Console.WriteLine("");
+                Console.WriteLine("ComponentController.UpdateIsExpanded(ComponentDTO).end".Pastel(Color.Yellow));
+                Console.WriteLine("HttpPost response: Ok()");
+
+                return Ok();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         [HttpPost("getComponentsByParentFolder")]
         public IActionResult GetComponentsByParentFolder([FromBody] FolderDTO dto)
         {

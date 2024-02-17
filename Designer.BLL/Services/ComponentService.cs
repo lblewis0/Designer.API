@@ -46,6 +46,54 @@ namespace Designer.BLL.Services
             Console.WriteLine("ComponentService.CreateComponent(ComponentDTO).end");
         }
 
+        public void UpdateIsSelected(ComponentDTO dto)
+        {
+            Console.WriteLine("ComponentService.UpdateIsSelected(ComponentDTO).start");
+
+            DateTime parsedCreationDate = DateParser.ParseDate(dto.CreationDate);
+            DateTime parsedLastUpdateDate = DateParser.ParseDate(dto.LastUpdateDate);
+
+            Component newComponent = new Component();
+
+            newComponent.Id = dto.Id;
+            newComponent.Name = dto.Name;
+            newComponent.CreationDate = parsedCreationDate;
+            newComponent.LastUpdateDate = parsedLastUpdateDate;
+            newComponent.ProjectId = dto.ProjectId;
+            newComponent.ParentFolderId = dto.ParentFolderId;
+            newComponent.IsSelected = dto.IsSelected;
+            newComponent.IsExpanded = dto.IsExpanded;
+
+
+            _componentRepository.UpdateIsSelected(newComponent);
+
+            Console.WriteLine("ComponentService.UpdateIsSelected(ComponentDTO).end");
+        }
+
+        public void UpdateIsExpanded(ComponentDTO dto)
+        {
+            Console.WriteLine("ComponentService.UpdateIsExpanded(ComponentDTO).start");
+
+            DateTime parsedCreationDate = DateParser.ParseDate(dto.CreationDate);
+            DateTime parsedLastUpdateDate = DateParser.ParseDate(dto.LastUpdateDate);
+
+            Component newComponent = new Component();
+
+            newComponent.Id = dto.Id;
+            newComponent.Name = dto.Name;
+            newComponent.CreationDate = parsedCreationDate;
+            newComponent.LastUpdateDate = parsedLastUpdateDate;
+            newComponent.ProjectId = dto.ProjectId;
+            newComponent.ParentFolderId = dto.ParentFolderId;
+            newComponent.IsSelected = dto.IsSelected;
+            newComponent.IsExpanded = dto.IsExpanded;
+
+
+            _componentRepository.UpdateIsExpanded(newComponent);
+
+            Console.WriteLine("ComponentService.UpdateIsExpanded(ComponentDTO).end");
+        }
+
         public List<ComponentDTO> GetComponentsByParentFolder(FolderDTO dto)
         {
             Console.WriteLine("ComponentService.GetComponentsByParentFolder(FolderDTO).start");

@@ -116,6 +116,52 @@ namespace Designer.BLL.Services
             Console.WriteLine("FolderService.UpdateLastUpdateDate(FolderDTO).end");
         }
 
+        public void UpdateIsSelected(FolderDTO dto)
+        {
+            Console.WriteLine("FolderService.UpdateIsSelected(FolderDTO).start");
+
+            DateTime parsedCreationDate = DateParser.ParseDate(dto.CreationDate);
+            DateTime parsedLastUpdateDate = DateParser.ParseDate(dto.LastUpdateDate);
+
+            Folder newFolder = new Folder();
+
+            newFolder.Id = dto.Id;
+            newFolder.Name = dto.Name;
+            newFolder.CreationDate = parsedCreationDate;
+            newFolder.LastUpdateDate = parsedLastUpdateDate;
+            newFolder.ProjectId = dto.ProjectId;
+            newFolder.ParentFolderId = dto.ParentFolderId;
+            newFolder.IsSelected = dto.IsSelected;
+            newFolder.IsExpanded = dto.IsExpanded;
+
+            _folderRepository.UpdateIsSelected(newFolder);
+
+            Console.WriteLine("FolderService.UpdateIsSelected(FolderDTO).end");
+        }
+
+        public void UpdateIsExpanded(FolderDTO dto)
+        {
+            Console.WriteLine("FolderService.UpdateIsExpanded(FolderDTO).start");
+
+            DateTime parsedCreationDate = DateParser.ParseDate(dto.CreationDate);
+            DateTime parsedLastUpdateDate = DateParser.ParseDate(dto.LastUpdateDate);
+
+            Folder newFolder = new Folder();
+
+            newFolder.Id = dto.Id;
+            newFolder.Name = dto.Name;
+            newFolder.CreationDate = parsedCreationDate;
+            newFolder.LastUpdateDate = parsedLastUpdateDate;
+            newFolder.ProjectId = dto.ProjectId;
+            newFolder.ParentFolderId = dto.ParentFolderId;
+            newFolder.IsSelected = dto.IsSelected;
+            newFolder.IsExpanded = dto.IsExpanded;
+
+            _folderRepository.UpdateIsExpanded(newFolder);
+
+            Console.WriteLine("FolderService.UpdateIsExpanded(FolderDTO).end");
+        }
+
         public FolderDTO GetByProjectId(ProjectDTO dto)
         {
             Console.WriteLine("FolderService.GetByProjectId(ProjectDTO).start");

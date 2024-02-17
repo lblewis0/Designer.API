@@ -61,6 +61,46 @@ namespace Designer.DAL.Repositories
 
         }
 
+        public void UpdateIsSelected(Component component)
+        {
+            Console.WriteLine("ComponentRepository.UpdateIsSelected(Component component).start");
+
+            using (SqlCommand cmd = _connection.CreateCommand())
+            {
+                string sql = "UPDATE Components SET IsSelected=@isSelected WHERE Id=@id";
+                cmd.CommandText = sql;
+
+                cmd.Parameters.AddWithValue("isSelected", component.IsSelected);
+                cmd.Parameters.AddWithValue("id", component.Id);
+
+                _connection.Open();
+                cmd.ExecuteNonQuery();
+                _connection.Close();
+            }
+
+            Console.WriteLine("ComponentRepository.UpdateIsSelected(Component component).end");
+        }
+
+        public void UpdateIsExpanded(Component component)
+        {
+            Console.WriteLine("ComponentRepository.UpdateIsExpanded(Component component).start");
+
+            using (SqlCommand cmd = _connection.CreateCommand())
+            {
+                string sql = "UPDATE Components SET IsExpanded=@isExpanded WHERE Id=@id";
+                cmd.CommandText = sql;
+
+                cmd.Parameters.AddWithValue("isExpanded", component.IsExpanded);
+                cmd.Parameters.AddWithValue("id", component.Id);
+
+                _connection.Open();
+                cmd.ExecuteNonQuery();
+                _connection.Close();
+            }
+
+            Console.WriteLine("ComponentRepository.UpdateIsExpanded(Component component).end");
+        }
+
         public List<Component> GetByParentFolder(Folder folder)
         {
             Console.WriteLine("ComponentRepository.GetByParentFolder(Folder folder).start");

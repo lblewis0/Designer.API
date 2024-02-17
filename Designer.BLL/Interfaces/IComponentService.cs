@@ -11,6 +11,10 @@ namespace Designer.BLL.Interfaces
     {
         void CreateComponent(ComponentDTO dto);
 
+        void UpdateIsSelected(ComponentDTO dto);
+
+        void UpdateIsExpanded(ComponentDTO dto);
+
         List<ComponentDTO> GetComponentsByParentFolder(FolderDTO dto);
     }
 }

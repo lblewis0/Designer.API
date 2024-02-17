@@ -17,6 +17,10 @@ namespace Designer.DAL.Interfaces
 
         void UpdateLastUpdateDate(Folder folder);
 
+        void UpdateIsSelected(Folder folder);
+
+        void UpdateIsExpanded(Folder folder);
+
         Folder GetByProjectId(Project project);
 
         List<Folder> GetByParentFolder(Folder folder);
