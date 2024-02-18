@@ -86,7 +86,7 @@ namespace Designer.DAL.Repositories
 
             using (SqlCommand cmd = _connection.CreateCommand())
             {
-                string sql = "UPDATE Projects SET Name=@name WHERE Id=@id";
+                string sql = "UPDATE Folders SET Name=@name WHERE Id=@id";
                 cmd.CommandText = sql;
 
                 cmd.Parameters.AddWithValue("name", folder.Name);
@@ -99,7 +99,7 @@ namespace Designer.DAL.Repositories
 
             using (SqlCommand cmd = _connection.CreateCommand())
             {
-                string sql = "UPDATE Projects SET LastUpdateDate=@lastUpdateDate WHERE Id=@id";
+                string sql = "UPDATE Folders SET LastUpdateDate=@lastUpdateDate WHERE Id=@id";
                 cmd.CommandText = sql;
 
                 cmd.Parameters.AddWithValue("lastUpdateDate", folder.LastUpdateDate);
