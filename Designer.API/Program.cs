@@ -1,7 +1,10 @@
 using Designer.BLL.Configurations;
 using Designer.BLL.DependencyInjection;
 using Designer.DAL.DependencyInjection;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using System.Data.SqlClient;
+using System.Text;
 
 namespace Designer.API
 {
@@ -30,6 +33,19 @@ namespace Designer.API
             JwtConfiguration jwtConfig = builder.Configuration.GetSection("JwtSettings").Get<JwtConfiguration>();
             builder.Services.AddRepositories();
             builder.Services.AddBusinessServices(jwtConfig);
+
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(
+                JwtBearerDefaults.AuthenticationScheme,
+                options => options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = jwtConfig.ValidateIssuer,
+                    ValidateAudience = jwtConfig.ValidateAudience,
+                    ValidateLifetime = jwtConfig.ValidateLifeTime,
+                    ValidIssuer = jwtConfig.Issuer,
+                    ValidAudience = jwtConfig.Audience,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfig.Signature)),
+                }
+            );
 
             var app = builder.Build();
 

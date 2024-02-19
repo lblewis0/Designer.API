@@ -13,7 +13,7 @@ namespace Designer.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class ComponentController : ControllerBase
     {
         private readonly IComponentService _componentService;

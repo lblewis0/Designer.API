@@ -12,7 +12,7 @@ namespace Designer.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class FolderController : ControllerBase
     {
         private readonly IFolderService _folderService;

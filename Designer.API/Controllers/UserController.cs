@@ -11,7 +11,7 @@ namespace Designer.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
